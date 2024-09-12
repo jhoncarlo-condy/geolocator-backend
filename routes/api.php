@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GeoInfoController;
+use App\Http\Controllers\SearchHistoryController;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -33,5 +34,6 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource('geo-info', GeoInfoController::class);
 
+    Route::apiResource('search-history', SearchHistoryController::class);
 });
 
