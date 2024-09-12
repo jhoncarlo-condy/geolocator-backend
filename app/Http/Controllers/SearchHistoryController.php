@@ -6,28 +6,13 @@ use Illuminate\Http\Request;
 
 class SearchHistoryController extends Controller
 {
-    public function index()
-    {
+    public function index() {}
 
-    }
+    public function show() {}
 
-    public function show()
-    {
+    public function store() {}
 
-    }
+    public function update() {}
 
-    public function store()
-    {
-
-    }
-
-    public function update()
-    {
-
-    }
-
-    public function destroy()
-    {
-
-    }
+    public function destroy() {}
 }
