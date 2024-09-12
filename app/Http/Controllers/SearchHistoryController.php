@@ -17,6 +17,7 @@ class SearchHistoryController extends Controller
 
         $result = $history->simplePaginate($per_page);
 
+
         $result->data = SearchHistoryResource::collection($result);
 
         return response()->json($result);
