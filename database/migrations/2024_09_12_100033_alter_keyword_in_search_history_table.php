@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('search_histories', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string("keyword")->unique();
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+        Schema::table('search_histories', function (Blueprint $table) {
+            $table->dropUnique(['keyword']);
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('search_histories');
+        Schema::table('search_histories', function (Blueprint $table) {
+            $table->unique(['keyword']);
+        });
     }
 };
