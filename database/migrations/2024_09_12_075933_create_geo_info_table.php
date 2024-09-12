@@ -15,6 +15,16 @@ return new class extends Migration
     {
         Schema::create('geo_info', function (Blueprint $table) {
             $table->id();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string("ip");
+            $table->string("hostname")->nullable();
+            $table->string("city")->nullable();
+            $table->string("region")->nullable();
+            $table->string("country")->nullable();
+            $table->string("loc")->nullable();
+            $table->string("org")->nullable();
+            $table->string("postal")->nullable();
+            $table->string("timezone")->nullable();
             $table->timestamps();
         });
     }
