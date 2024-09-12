@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Actions\SearchHistory\StoreSearchHistoryAction;
-use App\Http\Requests\SearchHistoryFormRequest;
 use Illuminate\Http\Request;
 use App\Models\SearchHistory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\SearchHistoryResource;
+use App\Http\Requests\SearchHistoryFormRequest;
+use App\Http\Actions\SearchHistory\StoreSearchHistoryAction;
 
 class SearchHistoryController extends Controller
 {
@@ -43,10 +44,16 @@ class SearchHistoryController extends Controller
 
     public function destroy(SearchHistory $history)
     {
-        $history->delete();
+        if($history->user_id == Auth::user()->id) {
+            $history->delete();
+            return response()->json([
+                'message' => 'keyword deleted'
+            ]);
+        }
 
         return response()->json([
-            'message' => 'keyword deleted'
+            'success' => false,
+            'message' => 'keyword not found'
         ]);
     }
 }
