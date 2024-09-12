@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('geo_info', function (Blueprint $table) {
+        Schema::create('geo_infos', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('user_id');
             $table->string("ip");
             $table->string("hostname")->nullable();
             $table->string("city")->nullable();
@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string("postal")->nullable();
             $table->string("timezone")->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
