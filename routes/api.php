@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GeoInfoController;
 use App\Http\Controllers\SearchHistoryController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -30,8 +31,9 @@ Route::post('/tokens/create', function (Request $request) {
     return ['token' => $token->plainTextToken];
 });
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::post('login', [UserController::class, 'login']);
 
+Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('geo-info', GeoInfoController::class);
 
     Route::apiResource('search-history', SearchHistoryController::class);
