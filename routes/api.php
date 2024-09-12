@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\GeoInfoController;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('/tokens/create', function (Request $request) {
+    $user = User::where('email', $request->email)->first();
+
+    $token = $user->createToken(Str::uuid());
+
+    return ['token' => $token->plainTextToken];
 });
+
+Route::middleware('auth:sanctum')->group(function(){
+
+    Route::apiResource('geo-info', GeoInfoController::class);
+
+});
+
