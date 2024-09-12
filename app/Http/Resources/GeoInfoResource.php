@@ -9,8 +9,8 @@ class GeoInfoResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'       => $this->id,
-            'user_id'  => $this->user_id,
+            // 'id'       => $this->id,
+            // 'user_id'  => $this->user_id,
             'ip'       => $this->ip,
             'hostname' => $this->hostname,
             'city'     => $this->city,
